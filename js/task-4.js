@@ -1,34 +1,42 @@
 'use strict';
 
-// Напиши функцию countTotalSalary(employees) принимающую объект зарплат.
-// Функция считает общую сумму запрплаты работников и возращает ее.
-// Каждое поле объекта, передаваемого в функцию, имеет вид "имя": "зарплата".
+// Напиши класс StringBuilder.
+// На вход он получает один параметр - строку,
+// которую записывает в свойство _value.
 
-const countTotalSalary = function(employees) {
-  let total = 0;
-  for (const key in employees) {
-    total = total + employees[key];
+// Добавь классу следующий функционал:
+// Геттер value - возвращает текущее значение поля _value
+// Метод append(str) - получает парметр str (строку) и добавляет ее в конец _value
+// Метод prepend(str) - получает парметр str (строку) и добавляет ее в начало value
+// Метод pad(str) - получает парметр str (строку) и добавляет ее в начало и в конец _value
+
+class StringBuilder {
+  constructor(str) {
+    this._value = str;
   }
-  return total;
-};
 
-/*
- * Вызовы функции для проверки работоспособности твоей реализации.
- */
-console.log(countTotalSalary({})); // 0
+  get value() {
+    return this._value;
+  }
+  append(str) {
+    this._value = this._value + str;
+  }
+  prepend(str) {
+    this._value = str + this._value;
+  }
 
-console.log(
-  countTotalSalary({
-    mango: 100,
-    poly: 150,
-    alfred: 80,
-  }),
-); // 330
+  pad(str) {
+    this._value = str + this._value + str;
+  }
+}
 
-console.log(
-  countTotalSalary({
-    kiwi: 200,
-    lux: 50,
-    chelsy: 150,
-  }),
-); // 400
+const builder = new StringBuilder('.');
+
+builder.append('^');
+console.log(builder.value); // '.^'
+
+builder.prepend('^');
+console.log(builder.value); // '^.^'
+
+builder.pad('=');
+console.log(builder.value); // '=^.^='
