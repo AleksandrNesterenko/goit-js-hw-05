@@ -1,47 +1,45 @@
 'use strict';
+// Напиши класс Storage, который будет создавать объекты для управления складом товаров.
+// При вызове будет получать один аргумент - начальный массив товаров, и записывать его в свойство items.
 
-// Напиши функцию findBestEmployee(employees),
-// которая принимает объект сотрудников и возвращает имя самого
-// продуктивного(который выполнил больше всех задач).Сотрудники и кол - во выполненых задач
-// содержатся как свойства объекта в формате "имя": "кол-во задач".
+// Добавь методы класса:
 
-const findBestEmployee = function(employees) {
-  let max = 0;
-  let name;
+// getItems() - возвращает массив текущих товаров
+// addItem(item) - получает новый товар и добавляет его к текущим
+// removeItem(item) - получет товар и, если он есть, удаляет его из текущихч".
 
-  for (const i in employees) {
-    if (max < employees[i]) {
-      max = employees[i];
-      name = i;
+class Storage {
+  constructor(items) {
+    this.items = items;
+  }
+  getItems() {
+    return this.items;
+  }
+
+  addItem(item) {
+    return this.items.push(item);
+  }
+
+  removeItem(item) {
+    const id = this.items.indexOf(item);
+    if (id !== -1) {
+      this.items.splice(id, 1);
     }
   }
-   return name;
-};
-/*
- * Вызовы функции для проверки работоспособности твоей реализации.
- */
-console.log(
-  findBestEmployee({
-    ann: 29,
-    david: 35,
-    helen: 1,
-    lorence: 99,
-  }),
-); // lorence
+}
 
-console.log(
-  findBestEmployee({
-    poly: 12,
-    mango: 17,
-    ajax: 4,
-  }),
-); // mango
+const storage = new Storage([
+  'Нанитоиды',
+  'Пролонгер',
+  'Железные жупи',
+  'Антигравитатор',
+]);
 
-console.log(
-  findBestEmployee({
-    lux: 147,
-    david: 21,
-    kiwi: 19,
-    chelsy: 38,
-  }),
-); // lux
+const items = storage.getItems();
+console.table(items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор" ]
+
+storage.addItem('Дроид');
+console.table(storage.items); // [ "Нанитоиды", "Пролонгер", "Железные жупи", "Антигравитатор", "Дроид" ]
+
+storage.removeItem('Пролонгер');
+console.table(storage.items); // [ "Нанитоиды", "Железные жупи", "Антигравитатор", "Дроид" ]
