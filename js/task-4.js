@@ -24,7 +24,6 @@ class StringBuilder {
   prepend(str) {
     this._value = str + this._value;
   }
-
   pad(str) {
     this._value = str + this._value + str;
   }
